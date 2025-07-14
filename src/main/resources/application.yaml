@@ -1,0 +1,17 @@
+spring:
+  mail:
+    host: smtp.163.com
+    port: 465
+    username: arorms@163.com
+    password: FDfzBtqMmpH7aeiM
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.ssl.enable: true
+
+monitor:
+  email-to: 1272369577@qq.com
+  cpu-threshold: 0.5
+  mem-threshold-mb: 1000
+  disk-threshold-mb: 5000
+  temp-threshold-celsius: 75.0
