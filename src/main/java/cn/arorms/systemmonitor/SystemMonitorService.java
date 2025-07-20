@@ -70,7 +70,7 @@ public class SystemMonitorService {
                         "CPU Temperature: %.1f°C\n" +
                         "Memory Usage: %d MB\n" +
                         "System Status: %s\n",
-                hostname, timestampString, cpuLoad * 100, cpuTemp, usedMemoryMb, systemStatus);
+                timestampString, hostname, cpuLoad * 100, cpuTemp, usedMemoryMb, systemStatus);
 
         System.out.println(statusReport);
 
