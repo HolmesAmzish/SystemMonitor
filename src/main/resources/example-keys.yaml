@@ -1,6 +1,0 @@
-spring:
-  mail:
-    password: 123
-
-  datasource:
-    password: 123
