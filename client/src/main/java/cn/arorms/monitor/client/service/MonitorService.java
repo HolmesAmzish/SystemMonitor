@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import cn.arorms.monitor.client.enums.SystemStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import oshi.hardware.GlobalMemory;
 import oshi.hardware.Sensors;
 
 
-@Service @Slf4j @EnableScheduling
+@Service @EnableScheduling @Slf4j
 public class MonitorService {
 
     private final ClientService clientService;
@@ -25,7 +26,9 @@ public class MonitorService {
     }
 
     private final long recordInterval = 1800 * 1000;
-    private  float cpuAlertTemperature = 55.0f;
+
+    @Value("${client.cpu-alert-threshold}")
+    private float cpuAlertTemperature;
 
     private final SystemInfo systemInfo = new SystemInfo();
 
@@ -41,6 +44,7 @@ public class MonitorService {
         // CPU Usage
         CentralProcessor processor = systemInfo.getHardware().getProcessor();
         double cpuUsage = processor.getSystemCpuLoad(1000);
+        cpuUsage = Math.round(cpuUsage * 100.0) / 100.0;
 //        log.info("CPU Usage: {}%", cpuUsage);
 
         // CPU Temperature
@@ -53,7 +57,10 @@ public class MonitorService {
         // Memory Usage
         GlobalMemory memory = systemInfo.getHardware().getMemory();
         long usedMemoryMb = (memory.getTotal() - memory.getAvailable()) / (1024 * 1024);
-        double memoryUsage = 1 - ((double)memory.getAvailable() / memory.getTotal());
+        double AvailableMemoryPercentage = Math.round((double)memory.getAvailable() / memory.getTotal()
+                * 100.0) / 100.0;
+
+        double memoryUsage = 1 - AvailableMemoryPercentage;
 
         // Timestamp
         LocalDateTime timestamp = LocalDateTime.now();
