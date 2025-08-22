@@ -1,6 +1,6 @@
 package cn.arorms.monitor.server.enums;
 
-public enum SystemStatus {
+public enum CriticalStatus {
     NORMAL,
     WARNING,
     CRITICAL

@@ -1,12 +1,10 @@
 package cn.arorms.monitor.server.service;
 
-import cn.arorms.monitor.server.model.SystemLog;
+import cn.arorms.monitor.server.models.SystemLog;
 import cn.arorms.monitor.server.repository.SystemLogRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Service class for handling system logs.

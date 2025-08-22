@@ -1,6 +1,6 @@
-package cn.arorms.monitor.server.model;
+package cn.arorms.monitor.server.models;
 
-import cn.arorms.monitor.server.enums.SystemStatus;
+import cn.arorms.monitor.server.enums.CriticalStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,18 +17,25 @@ public class SystemLog {
 
     private String hostname = "unknown";
 
+    @Column(name = "cpu_usage")
     private double cpuUsage;
+
+    @Column(name = "cpu_temperature")
     private double cpuTemperature;
+
+    @Column(name = "memory_used")
     private long memoryUsed;
+
+    @Column(name = "memory_usage")
     private double memoryUsage;
 
     @Enumerated(EnumType.STRING)
-    private SystemStatus status;
+    private CriticalStatus status;
 
     private LocalDateTime timestamp = LocalDateTime.now();
 
     public SystemLog(String hostname, double cpuUsage, double cpuTemp, long usedMemoryMb, double memoryUsage,
-                        SystemStatus systemStatus, LocalDateTime timestamp) {
+                     CriticalStatus systemStatus, LocalDateTime timestamp) {
         this.hostname = hostname;
         this.cpuUsage = cpuUsage;
         this.cpuTemperature = cpuTemp;

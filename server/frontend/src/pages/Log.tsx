@@ -16,7 +16,7 @@ function Log() {
     const [logs, setLogs] = useState<LogEntry[]>([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const pageSize = 10;
+    const pageSize = 15;
 
     const fetchLogs = async (pageNum: number) => {
         try {
@@ -45,17 +45,17 @@ function Log() {
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl">System Logs</h1>
+                <h1 className="font-bold text-3xl">System Logs</h1>
                 <button
                     onClick={() => fetchLogs(page)}
-                    className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600"
+                    className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
                 >
                     Refresh
                 </button>
             </div>
 
             {/* Table */}
-            <div className="overflow-x-auto shadow-lg bg-white">
+            <div className="overflow-x-auto shadow-lg bg-white rounded-lg">
                 <table className="min-w-full text-sm text-left">
                     <thead>
                     <tr>

@@ -1,6 +1,6 @@
 package cn.arorms.monitor.client.dtos;
 
-import cn.arorms.monitor.client.enums.SystemStatus;
+import cn.arorms.monitor.client.enums.CriticalStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,12 +18,12 @@ public class SystemLogDto {
     private long memoryUsed;
     private double memoryUsage;
 
-    private SystemStatus status;
+    private CriticalStatus status;
 
     private LocalDateTime timestamp = LocalDateTime.now();
 
     public SystemLogDto(String hostname, double cpuUsage, double cpuTemp, long usedMemoryMb, double memoryUsage,
-                        SystemStatus systemStatus, LocalDateTime timestamp) {
+                        CriticalStatus systemStatus, LocalDateTime timestamp) {
         this.hostname = hostname;
         this.cpuUsage = cpuUsage;
         this.cpuTemperature = cpuTemp;

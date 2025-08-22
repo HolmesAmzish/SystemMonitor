@@ -1,10 +1,9 @@
 package cn.arorms.monitor.client.service;
 import cn.arorms.monitor.client.dtos.SystemLogDto;
 
-import java.net.InetAddress;
 import java.time.LocalDateTime;
 
-import cn.arorms.monitor.client.enums.SystemStatus;
+import cn.arorms.monitor.client.enums.CriticalStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -36,7 +35,7 @@ public class MonitorService {
     public void reportSystemHealth() {
 
         // Set default system status
-        SystemStatus systemStatus = SystemStatus.NORMAL;
+        CriticalStatus systemStatus = CriticalStatus.NORMAL;
 
         // Hostname
         String hostname = clientService.getHostname();
@@ -51,7 +50,7 @@ public class MonitorService {
         Sensors sensors = systemInfo.getHardware().getSensors();
         double cpuTemp = sensors.getCpuTemperature();
         if (cpuTemp > cpuAlertTemperature) {
-            systemStatus = SystemStatus.WARNING;
+            systemStatus = CriticalStatus.WARNING;
         }
 
         // Memory Usage
